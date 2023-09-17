@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="uft-8">
+        <title>Marking Helper</title>      
+    </head>
+    <body>
+        <h1>Add New Assignment</h1>
+        <form method="POST">
+            <!-- Assignment details -->
+            <label for="assignment_number">Assignment Number:</label>
+            <input type="text" name="assignment_number" required><br>
+
+            <label for="total_mark">Total Mark:</label>
+            <input type="number" name="total_mark" required><br>
+
+            <!-- Task details (allow adding multiple tasks) -->
+            <div id="task-container">
+                <div class="task">
+                    <h3>Task Details</h3>
+                    <label for="task_number">Task Number:</label>
+                    <input type="text" name="task_number[]" required>
+                    <label for="task_total_mark">Total Mark for Task:</label>
+                    <input type="number" name="task_total_mark[]" required>
+                    
+                    <!-- Criteria details for this task (allow adding multiple criteria) -->
+                    <div class="criteria-container">
+                        <div class="criteria">
+                            <h3>Criteria Details</h3>
+                            <label for="criteria_number">Criteria Number:</label>
+                            <input type="text" name="criteria_number[]" required>
+                            <label for="description">Description:</label>
+                            <input type="text" name="description[]" required>
+                            <label for="marks">Marks:</label>
+                            <input type="number" name="marks[]" required>
+                            <label for="feedback_comment">Feedback Comment:</label>
+                            <input type="text" name="feedback_comment[]">
+                        </div>
+                    </div>
+                    <button type="button" class="add-criteria">Add Criteria</button>
+                </div>
+            </div>
+            <button type="button" class="add-task">Add Task</button>
+            <input type="submit" value="Add Assignment">
+        </form>
+        <script src="{{url_for('static', filename='js/add.js')}}"></script> 
+    </body>
+</html>
