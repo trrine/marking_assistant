@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -9,10 +10,10 @@
         <form method="POST">
             <!-- Assignment details -->
             <label for="assignment_number">Assignment Number:</label>
-            <input type="text" name="assignment_number" required><br>
+            <input type="text" name="assignment_number" required><br/>
 
             <label for="total_mark">Total Mark:</label>
-            <input type="number" name="total_mark" required><br>
+            <input type="number" name="total_mark" required><br/>
 
             <!-- Task details (allow adding multiple tasks) -->
             <div id="task-container">
@@ -43,6 +44,6 @@
             <button type="button" class="add-task">Add Task</button>
             <input type="submit" value="Add Assignment">
         </form>
-        <script src="{{url_for('static', filename='js/add.js')}}"></script> 
+        <script src="{% static 'js/add.js' %}"></script> 
     </body>
 </html>
