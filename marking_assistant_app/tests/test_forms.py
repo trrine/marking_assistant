@@ -1,48 +1,47 @@
 from django.test import TestCase
-from ..forms import AddAssignmentForm
+from ..forms import AssignmentForm, TaskForm, CriteriaForm
 
-class AddAssignmentFormTest(TestCase):
-    def test_valid_form(self):
-        form_data = {
+class AssignmentFormTest(TestCase):
+    def test_assignment_form_valid(self):
+        data = {
             "assignment_number": 1,
-            "subject_code": "Sample Subject",
-            "total_marks": 100,
-            "task_number": [1, 2],
-            "task_total_marks": [50, 30],
-            "criteria_number": [1, 2],
-            "description": ["Sample Desc 1", "Sample Desc 2"],
-            "marks": [10, 20],
-            "feedback_comment": ["", ""],
+            "subject_code": "ABC123",
+            "total_marks": 100.00
         }
-        form = AddAssignmentForm(data=form_data)
+        form = AssignmentForm(data=data)
         self.assertTrue(form.is_valid())
 
-    def test_invalid_form(self):
-        form_data = {
-            "assignment_number": None,  # Missing required field
-            "subject_code": "Sample Subject",
-            "total_marks": 100,
-            # Missing task-related fields
-            "task_total_marks": [50, 30],
-            "criteria_number": [1, 2],
-            "description": ["Sample Desc 1", "Sample Desc 2"],
-            "marks": [10, 20],
-            "feedback_comment": ["", ""],
-        }
-        form = AddAssignmentForm(data=form_data)
+    def test_assignment_form_invalid(self):
+        data = {}  # Invalid data, required fields missing
+        form = AssignmentForm(data=data)
         self.assertFalse(form.is_valid())
 
-    def test_empty_task(self):
-        form_data = {
-            "assignment_number": 1,
-            "subject_code": "Sample Subject",
-            "total_marks": 100,
-            "task_number": [],
-            "task_total_marks": [],
-            "criteria_number": [1, 2],
-            "description": ["Sample Desc 1", "Sample Desc 2"],
-            "marks": [10, 20],
-            "feedback_comment": ["", ""],
+class TaskFormTest(TestCase):
+    def test_task_form_valid(self):
+        data = {
+            "task_number": 1,
+            "total_marks": 50.00
         }
-        form = AddAssignmentForm(data=form_data)
+        form = TaskForm(data=data)
         self.assertTrue(form.is_valid())
+
+    def test_task_form_invalid(self):
+        data = {}  # Invalid data, required fields missing
+        form = TaskForm(data=data)
+        self.assertFalse(form.is_valid())
+
+class CriteriaFormTest(TestCase):
+    def test_criteria_form_valid(self):
+        data = {
+            "criteria_number": 1,
+            "description": "Test Criteria",
+            "marks": 10.00,
+            "feedback_comment": "Good job!"
+        }
+        form = CriteriaForm(data=data)
+        self.assertTrue(form.is_valid())
+
+    def test_criteria_form_invalid(self):
+        data = {}  # Invalid data, required fields missing
+        form = CriteriaForm(data=data)
+        self.assertFalse(form.is_valid())
