@@ -5,7 +5,7 @@ from ..models import Assignment, Task, Criteria
 
 class AddAssignmentViewTestCase(TestCase):
     def setUp(self):
-        # Set up any necessary initial data for the forms
+        # Set up initial data for the forms
         self.assignment_data = {
             "assignment_number": "1",
             "subject_code": "ABC123",
