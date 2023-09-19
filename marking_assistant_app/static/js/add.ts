@@ -25,8 +25,8 @@ function addTask() {
         <h3>Task Details</h3>
         <label for="task_number">Task Number:</label>
         <input type="text" name="task_number[]" required>
-        <label for="task_total_mark">Total Mark for Task:</label>
-        <input type="number" name="task_total_mark[]" required>
+        <label for="task_total_marks">Total Mark for Task:</label>
+        <input type="number" name="task_total_marks[]" required>
 
         <div class="criteria-container">
             <h4>Criteria Details</h4>
