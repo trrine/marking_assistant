@@ -47,7 +47,7 @@ def add_assignment_view(request):
                         feedback_comment=feedback_comment
                     )
 
-            return redirect("index_view")  # Redirect after submission
+            return redirect("index")  # Redirect after submission
 
     else:
         # Initialize an empty AssignmentForm for GET requests
