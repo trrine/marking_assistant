@@ -1,16 +1,17 @@
-# forms.py
 from django import forms
-from .models import Assignment
+from .models import Assignment, Task, Criteria
 
-class CombinedForm(forms.ModelForm):
+class AssignmentForm(forms.ModelForm):
     class Meta:
         model = Assignment
         fields = ["assignment_number", "subject_code", "total_marks"]
 
-    # Additional fields for Task and Criteria
-    task_number = forms.CharField()
-    task_total_marks = forms.DecimalField()
-    criteria_number = forms.CharField()
-    description = forms.CharField()
-    marks = forms.DecimalField()
-    feedback_comment = forms.CharField()
+class TaskForm(forms.ModelForm):
+    class Meta:
+        model = Task
+        fields = ["task_number", "total_marks"]
+
+class CriteriaForm(forms.ModelForm):
+    class Meta:
+        model = Criteria
+        fields = ["criteria_number", "description", "marks", "feedback_comment"]

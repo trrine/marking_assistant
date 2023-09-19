@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import CombinedForm
+from .forms import AssignmentForm, CriteriaForm, TaskForm
 from .models import Assignment, Task, Criteria
 
 def index_view(request):
@@ -7,42 +7,53 @@ def index_view(request):
 
 def add_assignment_view(request):
     if request.method == "POST":
-        combined_form = CombinedForm(request.POST)
-        if combined_form.is_valid():
-            # Save Assignment
-            assignment = combined_form.save()
+        # Handle the assignment form
+        assignment_form = AssignmentForm(request.POST)
 
-            # Process and save multiple tasks and criteria
-            task_numbers = request.POST.getlist("task_number[]")
-            task_total_marks = request.POST.getlist("task_total_mark[]")
-            criteria_numbers = request.POST.getlist("criteria_number[]")
-            descriptions = request.POST.getlist("description[]")
-            marks = request.POST.getlist("marks[]")
-            feedback_comments = request.POST.getlist("feedback_comment[]")
+        if assignment_form.is_valid():
+            assignment = assignment_form.save()  # Save the assignment
 
-            for i in range(len(task_numbers)):
-                task = Task(
+            # Handle tasks and criteria creation
+            task_data = request.POST.getlist("task_number[]")
+            task_total_marks_data = request.POST.getlist("task_total_marks[]")
+            criteria_data = request.POST.getlist("criteria_number[]")
+            description_data = request.POST.getlist("description[]")
+            marks_data = request.POST.getlist("marks[]")
+            feedback_comment_data = request.POST.getlist("feedback_comment[]")
+
+            for i in range(len(task_data)):
+                task_number = task_data[i]
+                task_total_marks = task_total_marks_data[i]
+
+                # Create a Task instance and associate it with the assignment
+                task = Task.objects.create(
                     assignment=assignment,
-                    task_number=task_numbers[i],
-                    total_mark=task_total_marks[i]
+                    task_number=task_number,
+                    total_marks=task_total_marks
                 )
-                task.save()
 
-                criteria = Criteria(
-                    task=task,
-                    criteria_number=criteria_numbers[i],
-                    description=descriptions[i],
-                    marks=marks[i],
-                    feedback_comment=feedback_comments[i]
-                )
-                criteria.save()
+                for j in range(len(criteria_data)):
+                    criteria_number = criteria_data[j]
+                    description = description_data[j]
+                    marks = marks_data[j]
+                    feedback_comment = feedback_comment_data[j]
 
-            # Redirect to index
-            return redirect("index_view")
+                    # Create a Criteria instance and associate it with the task
+                    criteria = Criteria.objects.create(
+                        task=task,
+                        criteria_number=criteria_number,
+                        description=description,
+                        marks=marks,
+                        feedback_comment=feedback_comment
+                    )
+
+            return redirect("index_view")  # Redirect to a success page after submission
+
     else:
-        combined_form = CombinedForm()
+        # Initialize an empty AssignmentForm for GET requests
+        assignment_form = AssignmentForm()
 
-    return render(request, "add.html", {"combined_form": combined_form})
+    return render(request, "add.html", {"assignment_form": assignment_form})
 
 def manage_assignments_view(request):
     return render(request, "manage.html")

@@ -2,7 +2,7 @@ from django.db import models
 
 class Assignment(models.Model):
     assignment_number = models.PositiveIntegerField(default=1)
-    subject_code = models.TextField()
+    subject_code = models.CharField(max_length=10)
     total_marks = models.DecimalField(max_digits=5, decimal_places=2)
 
     class Meta:

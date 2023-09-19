@@ -24,7 +24,7 @@ function addTask() {
         <hr>
         <h3>Task Details</h3>
         <label for="task_number">Task Number:</label>
-        <input type="text" name="task_number[]" required>
+        <input type="number" name="task_number[]" required>
         <label for="task_total_marks">Total Mark for Task:</label>
         <input type="number" name="task_total_marks[]" required>
 
@@ -32,13 +32,13 @@ function addTask() {
             <h4>Criteria Details</h4>
             <div class="criteria">
                 <label for="criteria_number">Criteria Number:</label>
-                <input type="text" name="criteria_number[]" required>
+                <input type="number" name="criteria_number[]" required>
                 <label for="description">Description:</label>
-                <input type="text" name="description[]" required>
+                <textarea name="description[]" rows="4" cols="50" required></textarea> <!-- Use textarea for description -->
                 <label for="marks">Marks:</label>
                 <input type="number" name="marks[]" required>
                 <label for="feedback_comment">Feedback Comment:</label>
-                <input type="text" name="feedback_comment[]">
+                <textarea name="feedback_comment[]" rows="4" cols="50"></textarea> <!-- Use textarea for feedback_comment -->
             </div>
         </div>
         <button type="button" class="add-criteria">Add Criteria</button>
@@ -57,11 +57,11 @@ function addCriteria(button: HTMLButtonElement) {
         <label for="criteria_number">Criteria Number:</label>
         <input type="text" name="criteria_number[]" required>
         <label for="description">Description:</label>
-        <input type="text" name="description[]" required>
+        <textarea name="description[]" rows="4" cols="50" required></textarea> <!-- Use textarea for description -->
         <label for="marks">Marks:</label>
         <input type="number" name="marks[]" required>
         <label for="feedback_comment">Feedback Comment:</label>
-        <input type="text" name="feedback_comment[]">
+        <textarea name="feedback_comment[]" rows="4" cols="50"></textarea> <!-- Use textarea for feedback_comment -->
     `;
 
     criteriaContainer.appendChild(criteriaDiv);

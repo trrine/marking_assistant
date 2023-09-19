@@ -1,52 +1,30 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="uft-8">
-        <title>Marking Helper</title>      
-    </head>
-    <body>
-        <h1>Add New Assignment</h1>
-        <form method="POST">
-            <!-- Assignment details -->
-            <label for="assignment_number">Assignment Number:</label>
-            <input type="text" name="assignment_number" required><br/>
+<head>
+    <meta charset="UTF-8">
+    <title>Marking Helper</title>
+</head>
+<body>
+<h1>Add New Assignment</h1>
 
-            <label for="subject">Subject:</label>
-            <input type="text" name="subject" required><br/>
+<form method="POST">
+    {% csrf_token %}
+    
+    <!-- Assignment form -->
+    {{ assignment_form.as_p }}
+    
+    <div id="task-container">
+        <!-- Task fields will be dynamically added here -->
+        <div class="criteria-container">
+            <!-- Criteria fields will be dynamically added here -->
+        </div>
+    </div>
 
-            <label for="total_marks">Total Mark:</label>
-            <input type="number" name="total_marks" required><br/>
+    <button type="button" class="add-task">Add Task</button>
+    <input type="submit" value="Save Assignment">
+</form>
 
-            <!-- Task details (allow adding multiple tasks) -->
-            <div id="task-container">
-                <div class="task">
-                    <h3>Task Details</h3>
-                    <label for="task_number">Task Number:</label>
-                    <input type="text" name="task_number[]" required>
-                    <label for="task_total_marks">Total Mark for Task:</label>
-                    <input type="number" name="task_total_marks[]" required>
-                    
-                    <!-- Criteria details for this task (allow adding multiple criteria) -->
-                    <div class="criteria-container">
-                        <div class="criteria">
-                            <h3>Criteria Details</h3>
-                            <label for="criteria_number">Criteria Number:</label>
-                            <input type="text" name="criteria_number[]" required>
-                            <label for="description">Description:</label>
-                            <input type="text" name="description[]" required>
-                            <label for="marks">Marks:</label>
-                            <input type="number" name="marks[]" required>
-                            <label for="feedback_comment">Feedback Comment:</label>
-                            <input type="text" name="feedback_comment[]">
-                        </div>
-                    </div>
-                    <button type="button" class="add-criteria">Add Criteria</button>
-                </div>
-            </div>
-            <button type="button" class="add-task">Add Task</button>
-            <input type="submit" value="Add Assignment">
-        </form>
-        <script src="{% static 'js/add.js' %}"></script> 
-    </body>
+<script src="{% static 'js/add.js' %}"></script>
+</body>
 </html>
