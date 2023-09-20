@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import AssignmentForm, CriteriaForm, TaskForm
 from .models import Assignment, Task, Criteria
+from django.forms import modelformset_factory
 
 def index_view(request):
     return render(request, "index.html")
@@ -62,10 +63,43 @@ def manage_assignments_view(request):
     return render(request, "manage.html", {"assignments": assignments})
 
 def edit_assignment_view(request, assignment_id):
+    # Get the assignment object based on the assignment_id
     assignment = get_object_or_404(Assignment, id=assignment_id)
-    
-    # Handle updating and deleting assignments
-    return render(request, "edit.html", {"assignment": assignment})
+
+    # Initialise empty formsets for tasks and criteria
+    TaskFormSet = modelformset_factory(Task, form=TaskForm, extra=0)
+    CriteriaFormSet = modelformset_factory(Criteria, form=CriteriaForm, extra=0)
+
+    # Check if the request is a POST (form submission)
+    if request.method == "POST":
+        # Populate the assignment form with POST data
+        assignment_form = AssignmentForm(request.POST, instance=assignment)
+        task_formset = TaskFormSet(request.POST, queryset=Task.objects.filter(assignment=assignment))
+        criteria_formset = CriteriaFormSet(request.POST, queryset=Criteria.objects.filter(task__assignment=assignment))
+
+        # Check if all forms are valid
+        if assignment_form.is_valid() and task_formset.is_valid() and criteria_formset.is_valid():
+            # Save the assignment form
+            assignment_form.save()
+
+            # Save the task and criteria formsets
+            task_formset.save()
+            criteria_formset.save()
+
+            # Redirect to manage assignments page
+            return redirect("manage_assignments")
+
+    else:
+        # Populate the assignment form with existing assignment data
+        assignment_form = AssignmentForm(instance=assignment)
+        task_formset = TaskFormSet(queryset=Task.objects.filter(assignment=assignment))
+        criteria_formset = CriteriaFormSet(queryset=Criteria.objects.filter(task__assignment=assignment))
+
+    return render(request, "edit.html", {
+        "assignment_form": assignment_form,
+        "task_formset": task_formset,
+        "criteria_formset": criteria_formset,
+    })
 
 def start_marking_view(request):
     return render(request, "marking.html")

@@ -1,8 +1,46 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Edit Assignment{% endblock %}
 
 {% block content %}
 <h1>Edit Assignment</h1>
 
+<form method="POST">
+    {% csrf_token %}
+
+    <!-- Assignment details form -->
+    {{ assignment_form.as_table }}
+
+    <!-- Display existing tasks -->
+    {% for task_form in task_formset %}
+        <fieldset class="task">
+            <legend>Task {{ forloop.counter }}</legend>
+            {{ task_form.as_table }}
+            <button type="button" class="delete-task">Delete Task</button>
+
+            <!-- Display existing criteria for this task -->
+            {% for criteria_form in criteria_formset.forms %}
+                {% if criteria_form.instance.task == task_form.instance %}
+                    <fieldset class="criteria">
+                        <legend>Criteria {{ forloop.counter }}</legend>
+                        {{ criteria_form.as_table }}
+                        <button type="button" class="delete-criteria">Delete Criteria</button>
+                    </fieldset>
+                {% endif %}
+            {% endfor %}
+
+            <button type="button" class="add-criteria">Add Criteria</button>
+        </fieldset>
+    {% endfor %}
+    
+    <!-- Add Task button -->
+    <button type="button" class="add-task">Add Task</button>
+
+    <button type="button" class="delete-assignment">Delete Assignment</button>
+    
+    <input type="submit" value="Save Changes">
+</form>
+
+<script src="{% static 'js/edit_assignment.js' %}"></script>
 {% endblock %}
