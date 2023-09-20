@@ -2,4 +2,11 @@
 
 {% block content %}
     <h1>Manage Assignments</h1>
+    <ul>
+        {% for assignment in assignments %}
+            <li>
+                <a href="{% url 'edit_assignment' assignment.id %}">{{ assignment.subject_code }}: Assignment {{ assignment.assignment_number }}</a>
+            </li>
+        {% endfor %}
+    </ul>
 {% endblock %}

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import AssignmentForm, CriteriaForm, TaskForm
 from .models import Assignment, Task, Criteria
 
@@ -56,7 +56,16 @@ def add_assignment_view(request):
     return render(request, "add.html", {"assignment_form": assignment_form})
 
 def manage_assignments_view(request):
-    return render(request, "manage.html")
+    # Retrieve a list of existing assignments
+    assignments = Assignment.objects.all()
+    
+    return render(request, "manage.html", {"assignments": assignments})
+
+def edit_assignment_view(request, assignment_id):
+    assignment = get_object_or_404(Assignment, id=assignment_id)
+    
+    # Handle updating and deleting assignments
+    return render(request, "edit.html", {"assignment": assignment})
 
 def start_marking_view(request):
     return render(request, "marking.html")
