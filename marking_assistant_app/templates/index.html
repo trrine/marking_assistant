@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="uft-8">
-        <title>Marking Helper</title>
-    </head>
-<body>
-    <h1>Marking Helper</h1>
-    <div class="nav__buttons">
-        <a href="/start_marking">START MARKING</a>
-        <a href="/add_assignment">ADD NEW ASSIGNMENTS</a>
-        <a href="/manage_assignments">MANAGE ASSIGNMENTS</a>
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Marking Assistant</h1>
+    <div class="main-content">
+        <a href="/add_assignment" class="nav-button">ADD ASSIGNMENT</a>
+        <a href="/start_marking" class="nav-button">START MARKING</a>
+        <a href="/manage_assignments" class="nav-button">MANAGE ASSIGNMENTS</a>
     </div>
-</body>
-</html>
+{% endblock %}
