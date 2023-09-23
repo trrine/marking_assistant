@@ -10,19 +10,14 @@
     <form method="POST">
         {% csrf_token %}
         
-        <!-- Assignment form -->
         {{ assignment_form.as_p }}
         
         <div id="task-container">
-            <!-- Task fields will be dynamically added here -->
-            <div class="criteria-container">
-                <!-- Criteria fields will be dynamically added here -->
-            </div>
         </div>
 
         <button type="button" class="add-task">Add Task</button>
         <input type="submit" value="Save Assignment">
     </form>
     
-    <script src="{% static 'js/add.js' %}"></script>
+    <script src="{% static 'js/add_manage_form.js' %}"></script>
 {% endblock %}

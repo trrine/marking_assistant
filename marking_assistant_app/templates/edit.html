@@ -10,31 +10,34 @@
     {% csrf_token %}
 
     <!-- Assignment details form -->
-    {{ assignment_form.as_table }}
+    {{ assignment_form.as_p }}
 
     <!-- Display existing tasks -->
-    {% for task_form in task_formset %}
-        <fieldset class="task">
-            <legend>Task {{ forloop.counter }}</legend>
-            {{ task_form.as_table }}
-            <button type="button" class="delete-task">Delete Task</button>
+    <div id="task-container">
+        {% for task_form in task_formset %}
+            <div class="task">
+                <h3>Task Details</h3>
+                {{ task_form.as_table }}
 
-            <!-- Display existing criteria for this task -->
-            {% for criteria_form in criteria_formset.forms %}
-                {% if criteria_form.instance.task == task_form.instance %}
-                    <fieldset class="criteria">
-                        <legend>Criteria {{ forloop.counter }}</legend>
-                        {{ criteria_form.as_table }}
-                        <button type="button" class="delete-criteria">Delete Criteria</button>
-                    </fieldset>
-                {% endif %}
-            {% endfor %}
+                <!-- Display existing criteria for this task -->
+                <div class="criteria-container">
+                    <h4>Criteria Details</h4>
+                    {% for criteria_form in criteria_formset.forms %}
+                        {% if criteria_form.instance.task == task_form.instance %}
+                            <div class="criteria">
+                                {{ criteria_form.as_table }}
+                                <button type="button" class="delete-criteria">Delete Criteria</button>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
 
-            <button type="button" class="add-criteria">Add Criteria</button>
-        </fieldset>
-    {% endfor %}
+                <button type="button" class="add-criteria">Add Criteria</button>
+                <button type="button" class="delete-task">Delete Task</button>
+            </div>
+        {% endfor %}
+    </div>
     
-    <!-- Add Task button -->
     <button type="button" class="add-task">Add Task</button>
 
     <button type="button" class="delete-assignment">Delete Assignment</button>
@@ -42,5 +45,5 @@
     <input type="submit" value="Save Changes">
 </form>
 
-<script src="{% static 'js/edit_assignment.js' %}"></script>
+<script src="{% static 'js/add_manage_form.js' %}"></script>
 {% endblock %}
