@@ -1,12 +1,23 @@
 {% extends "base.html" %}
 
+{% block title %}Marking{% endblock %}
+
 {% block content %}
-    <h1>Start Marking</h1>
-    <p>Choose an assignment...</p>
+    <h1>Marking</h1>
+    <p>Choose a task to start marking...</p>
     <ul>
         {% for assignment in assignments %}
             <li>
-                <a href="{% url 'mark_assignment' assignment.id %}">{{ assignment.subject_code }}: Assignment {{ assignment.assignment_number }}</a>
+                {{ assignment.subject_code }}: Assignment {{ assignment.assignment_number }}
+                <ul>
+                    {% for task in assignment.task_set.all %}
+                        <li>
+                            <a href="{% url 'mark_task' assignment.id task.id %}">
+                                Task {{ task.task_number }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
             </li>
         {% endfor %}
     </ul>

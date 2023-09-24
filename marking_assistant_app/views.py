@@ -174,5 +174,81 @@ def start_marking_view(request):
     return render(request, "marking.html", {"assignments": assignments})
 
 
-def mark_assignment_view(request, assignment_id):
-    return render(request, "mark_assignment.html")
+def mark_task_view(request, assignment_id, task_id):
+    assignment = get_object_or_404(Assignment, id=assignment_id)
+    task = get_object_or_404(Task, id=task_id)
+
+    if request.method == "POST":
+        # Retrieve the current marking results data from the session
+        marking_results_data = request.session.get("marking_results_data", [])
+
+        # Retrieve total marks available for task
+        task_marks_total = task.total_marks
+        
+        # Extract data from the form
+        student_number = request.POST.get("student_number")
+        criteria_checked = request.POST.getlist("criteria_checked[]")
+        extra_comments = request.POST.get("extra_comments").strip()
+
+        # Initialise tasks marks for student
+        task_marks = task_marks_total
+        feedback_comments = []
+
+        # Go through the criteria for the task and find the ones not met
+        for criteria in task.criteria_set.all():
+            if str(criteria.id) not in criteria_checked:
+                mark_deduction = criteria.marks
+                feedback = criteria.feedback_comment
+                task_marks -= mark_deduction
+
+                feedback_comments.append(feedback + " (-" + str(mark_deduction) + ").")
+
+        # Add extra comment from user if not empty
+        if len(extra_comments) != 0:
+            # Add period if needed
+            if not extra_comments.endswith("."):
+                extra_comments += "."
+
+            feedback_comments.append(extra_comments)
+        
+        # Add extra feedback based on mark
+        if (task_marks / task_marks_total) >= 0.9:
+            feedback_comments.append("Good job!")
+
+        elif (task_marks / task_marks_total) >= 0.8:
+            feedback_comments.append("Good effort!")
+
+        # Transform feedback comment list to string
+        feedback_string = " ".join(feedback_comments)
+
+        # Save marking results for student
+        student_task_results = {
+            "student_number": str(student_number),
+            "assignment_number": str(assignment_id),
+            "task_number": str(task_id),
+            "marks": str(task_marks),
+            "feedback": feedback_string
+        }
+
+        # Append the student's results to the marking_results_data
+        marking_results_data.append(student_task_results)
+
+        # Update the session with the modified marking_results_data
+        request.session["marking_results_data"] = marking_results_data
+
+        print(marking_results_data)
+
+
+    return render(request, "mark_task.html", {
+        "assignment": assignment,
+        "task": task,
+    })
+
+def download_marking_results(request, task_id):
+    # Retrieve the marking results data from the session
+    marking_results_data = request.session.get("marking_results_data", [])
+
+    if not marking_results_data:
+        # Handle the case when there are no marking results
+        # You can return an error message or handle it as needed
+        pass

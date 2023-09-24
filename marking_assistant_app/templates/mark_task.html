@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Mark Task</h1>
+
+    <h2>{{ assignment.subject_code }}: Assignment {{ assignment.assignment_number }}</h2>
+    <h3>Task {{ task.task_number }}</h3>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <!-- Student number input field -->
+        <label for="student_number">Student Number:</label>
+        <input type="text" name="student_number" required>
+
+        <!-- Display the list of marking criteria here -->
+        <h4>Criteria:</h4>
+        <ul>
+            {% for criteria in task.criteria_set.all %}
+                <li>
+                    <label>
+                        <input type="checkbox" name="criteria_checked[]" value="{{ criteria.id }}">
+                        {{ criteria.description }}
+                    </label>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <!-- Extra comments textarea -->
+        <label for="extra_comments">Extra Comments:</label>
+        <textarea name="extra_comments" rows="4" cols="50"></textarea>
+
+        <!-- Submit button -->
+        <input type="submit" value="Save Marking">
+    </form>
+
+    <a href="{% url 'start_marking' %}">Back to Marking Dashboard</a>
+{% endblock %}
