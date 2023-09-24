@@ -11,6 +11,7 @@ class TaskForm(forms.ModelForm):
         model = Task
         fields = ["task_number", "total_marks"]
 
+
 class CriteriaForm(forms.ModelForm):
     class Meta:
         model = Criteria

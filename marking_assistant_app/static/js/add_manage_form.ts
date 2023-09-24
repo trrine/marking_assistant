@@ -12,6 +12,7 @@ function addTask() {
 
     taskDiv.innerHTML = `
         <h3>Task Details</h3>
+        <input type="hidden" name="task_id[]" value="">
         <label for="task_number">Task Number:</label>
         <input type="number" name="task_number[]" required>
         <label for="task_total_marks">Total Mark for Task:</label>
@@ -20,6 +21,7 @@ function addTask() {
         <div class="criteria-container">
             <h4>Criteria Details</h4>
             <div class="criteria">
+                <input type="hidden" name="criteria_id[]" value="">
                 <label for="criteria_number">Criteria Number:</label>
                 <input type="number" name="criteria_number[]" required>
                 <label for="description">Description:</label>
