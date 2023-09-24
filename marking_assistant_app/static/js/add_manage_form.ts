@@ -97,3 +97,30 @@ function deleteCriteria(button: HTMLButtonElement) {
     const criteriaContainer = criteriaDiv.parentElement as HTMLDivElement;
     criteriaContainer.removeChild(criteriaDiv);
 }
+
+// FUNCTIONALITY FOR DELETING ASSIGNMENT
+
+document.addEventListener("DOMContentLoaded", () => {
+    const deleteAssignmentButton = document.querySelector(".delete-assignment") as HTMLButtonElement | null;
+
+    if (deleteAssignmentButton) {
+        deleteAssignmentButton.addEventListener("click", deleteAssignment);
+    }
+});
+
+function deleteAssignment() {
+    const confirmDelete = confirm("Are you sure you want to delete this assignment?");
+
+    if (confirmDelete) {
+        const form = document.querySelector("form") as HTMLFormElement | null;
+
+        if (form) {
+            const input = document.createElement("input");
+            input.type = "hidden";
+            input.name = "delete_assignment";
+            input.value = "1";
+            form.appendChild(input);
+            form.submit();
+        }
+    }
+}

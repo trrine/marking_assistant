@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import AssignmentForm, CriteriaForm, TaskForm
 from .models import Assignment, Task, Criteria
 from django.forms import modelformset_factory
-from django.db import transaction
 
 def index_view(request):
     return render(request, "index.html")
@@ -70,6 +69,11 @@ def edit_assignment_view(request, assignment_id):
     CriteriaFormSet = modelformset_factory(Criteria, form=CriteriaForm, extra=0)
     
     if request.method == "POST":
+        if "delete_assignment" in request.POST:
+            # Handle deletion of the entire assignment
+            assignment.delete()
+            return redirect("manage_assignments")  # Redirect to the index page after deletion
+       
         assignment_form = AssignmentForm(request.POST, instance=assignment)
         
         if assignment_form.is_valid():
@@ -134,7 +138,7 @@ def edit_assignment_view(request, assignment_id):
                         }
                     )
             
-            return redirect("index")
+            return redirect("manage_assignments")
     else:
         # Populate the assignment form with existing assignment data
         assignment_form = AssignmentForm(instance=assignment)
