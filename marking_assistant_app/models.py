@@ -18,10 +18,6 @@ class Task(models.Model):
 
 class Criteria(models.Model):
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
-    criteria_number = models.PositiveIntegerField(default=1)
     description = models.TextField()
     marks = models.DecimalField(max_digits=5, decimal_places=2)
     feedback_comment = models.TextField()
-
-    class Meta:
-        unique_together = ("task", "criteria_number")

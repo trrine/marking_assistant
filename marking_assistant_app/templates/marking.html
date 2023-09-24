@@ -2,5 +2,12 @@
 
 {% block content %}
     <h1>Start Marking</h1>
-    <p>Choose an assignment</p>
+    <p>Choose an assignment...</p>
+    <ul>
+        {% for assignment in assignments %}
+            <li>
+                <a href="{% url 'mark_assignment' assignment.id %}">{{ assignment.subject_code }}: Assignment {{ assignment.assignment_number }}</a>
+            </li>
+        {% endfor %}
+    </ul>
 {% endblock %}

@@ -15,4 +15,4 @@ class TaskForm(forms.ModelForm):
 class CriteriaForm(forms.ModelForm):
     class Meta:
         model = Criteria
-        fields = ["criteria_number", "description", "marks", "feedback_comment"]
+        fields = ["description", "marks", "feedback_comment"]

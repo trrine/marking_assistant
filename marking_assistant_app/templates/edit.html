@@ -31,9 +31,8 @@
                         {% if criteria_form.instance.task == task_form.instance %}
                             <div class="criteria">
                                 <input type="hidden" name="criteria_id[]" value="{{ criteria_form.instance.id }}">
+                                <input type="hidden" name="task_for_criteria[]" value="{{ task_form.instance.task_number }}">
                                 <!-- Manually render criteria fields -->
-                                <label for="criteria_number">Criteria Number:</label>
-                                <input type="number" name="criteria_number[]" value="{{ criteria_form.criteria_number.value }}" required>
                                 <label for="description">Description:</label>
                                 <textarea name="description[]" rows="4" cols="50" required>{{ criteria_form.description.value }}</textarea>
                                 <label for="marks">Marks:</label>

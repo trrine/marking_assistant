@@ -17,22 +17,7 @@ function addTask() {
         <input type="number" name="task_number[]" required>
         <label for="task_total_marks">Total Mark for Task:</label>
         <input type="number" name="task_total_marks[]" required>
-
-        <div class="criteria-container">
-            <h4>Criteria Details</h4>
-            <div class="criteria">
-                <input type="hidden" name="criteria_id[]" value="">
-                <label for="criteria_number">Criteria Number:</label>
-                <input type="number" name="criteria_number[]" required>
-                <label for="description">Description:</label>
-                <textarea name="description[]" rows="4" cols="50" required></textarea> 
-                <label for="marks">Marks:</label>
-                <input type="number" name="marks[]" required>
-                <label for="feedback_comment">Feedback Comment:</label>
-                <textarea name="feedback_comment[]" rows="4" cols="50"></textarea> 
-                <button type="button" class="delete-criteria">Delete Criteria</button> 
-            </div>
-        </div>
+        <div class="criteria-container"></div>
         <button type="button" class="add-criteria">Add Criteria</button>
         <button type="button" class="delete-task">Delete Task</button>
     `;
@@ -46,18 +31,19 @@ document.addEventListener("click", (event) => {
     // Check if the clicked element has the class "add-criteria"
     if ((event.target as HTMLElement).classList.contains("add-criteria")) {
         // Call the addCriteria function when an "Add Criteria" button is clicked
-        addCriteria(event.target as HTMLButtonElement);
+        const criteriaContainer = (event.target as HTMLElement).closest(".task")?.querySelector(".criteria-container") as HTMLDivElement;
+        const taskNumberInput = criteriaContainer.parentElement?.querySelector("input[name='task_number[]']") as HTMLInputElement;
+        addCriteria(event.target as HTMLButtonElement, criteriaContainer, taskNumberInput);
     }
 });
 
-function addCriteria(button: HTMLButtonElement) {
-    const criteriaContainer = button.parentElement?.querySelector(".criteria-container") as HTMLDivElement;
+function addCriteria(button: HTMLButtonElement, criteriaContainer: HTMLDivElement, taskNumberInput: HTMLInputElement) {
     const criteriaDiv = document.createElement("div");
     criteriaDiv.className = "criteria";
 
     criteriaDiv.innerHTML = `
-        <label for="criteria_number">Criteria Number:</label>
-        <input type="text" name="criteria_number[]" required>
+        <input type="hidden" name="criteria_id[]" value="">
+        <input type="hidden" name="task_for_criteria[]" value="${taskNumberInput.value}">
         <label for="description">Description:</label>
         <textarea name="description[]" rows="4" cols="50" required></textarea> 
         <label for="marks">Marks:</label>

@@ -7,4 +7,5 @@ urlpatterns = [
     path("manage_assignments/", views.manage_assignments_view, name="manage_assignments"),
     path("start_marking/", views.start_marking_view, name="start_marking"),
     path("edit_assignment/<int:assignment_id>/", views.edit_assignment_view, name="edit_assignment"),
+    path("mark_assignment/<int:assignment_id>/", views.mark_assignment_view, name="mark_assignment"),
 ]
