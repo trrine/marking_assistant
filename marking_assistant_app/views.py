@@ -1,8 +1,12 @@
 from collections import defaultdict
+import os
 from django.shortcuts import render, redirect, get_object_or_404
+
+from marking_assistant_app.utils import generate_marking_results_excel
 from .forms import AssignmentForm, CriteriaForm, TaskForm
 from .models import Assignment, Task, Criteria
 from django.forms import modelformset_factory
+from django.http import HttpResponse, FileResponse
 
 def index_view(request):
     return render(request, "index.html")
@@ -200,7 +204,6 @@ def mark_task_view(request, assignment_id, task_id):
                 mark_deduction = criteria.marks
                 feedback = criteria.feedback_comment
                 task_marks -= mark_deduction
-
                 feedback_comments.append(feedback + " (-" + str(mark_deduction) + ").")
 
         # Add extra comment from user if not empty
@@ -236,19 +239,30 @@ def mark_task_view(request, assignment_id, task_id):
         # Update the session with the modified marking_results_data
         request.session["marking_results_data"] = marking_results_data
 
-        print(marking_results_data)
-
-
     return render(request, "mark_task.html", {
         "assignment": assignment,
         "task": task,
     })
 
-def download_marking_results(request, task_id):
+def download_results_view(request):
     # Retrieve the marking results data from the session
     marking_results_data = request.session.get("marking_results_data", [])
 
-    if not marking_results_data:
-        # Handle the case when there are no marking results
-        # You can return an error message or handle it as needed
-        pass
+    if marking_results_data:
+        # Generate the Excel file for marking results and save it temporarily on the server
+        excel_file_path = generate_marking_results_excel(marking_results_data)
+
+        if os.path.exists(excel_file_path):
+            try:
+                # Clear the session data
+                request.session.pop("marking_results_data")
+                
+                # Serve the Excel file for download
+                return FileResponse(open(excel_file_path, "rb"), as_attachment=True, filename="marking_results.xlsx")
+            
+            except Exception as e:
+                print(e)
+                return HttpResponse("Error while serving the file", status=500)
+    
+    # Handle cases where there are no marking results
+    return HttpResponse("No marking results found", status=404)
