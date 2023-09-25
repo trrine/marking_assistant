@@ -1,0 +1,92 @@
+/* BASE */
+body {
+    --bs-body-font-family: "Figtree", sans-serif;
+    --bs-body-color: #1f1235;
+}
+
+header {
+    background-color: #a195ba !important;
+    margin-bottom: 40px !important;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    margin-left: 20px;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: #ff6e6c !important;
+    border-color: #ff6e6c !important;
+    border-width: 3px !important;
+    color: #1f1235 !important;
+    font-weight: bold !important;
+}
+
+/* BASE: NAVIGATION BAR */
+
+.navbar-nav {
+    padding-right: 20px;
+}
+
+.nav-item a {
+    color: #1f1235;
+}
+
+.nav-item a:hover {
+    color: white;
+}
+
+.nav-item {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* INDEX */
+
+.heading {
+    font-size: 50px;
+    font-weight: bold;
+    color:#1f1235;
+    text-align: center;
+}
+
+.index-text {
+    font-size: 26px;
+    text-align: center;
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+.nav-button {
+    font-size: 24px !important;
+    height: 100px !important;
+    display: inline-flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 250px !important;
+}
+
+.nav-button {
+    font-size: 24px !important;
+    height: 100px !important;
+    display: inline-flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 250px !important;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.nav-button:hover {
+    background-color: white !important;
+    color: #ff6e6c !important;
+}
+
+.main-content {
+    text-align: center !important;
+}
