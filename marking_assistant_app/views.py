@@ -220,6 +220,10 @@ def mark_task_view(request, assignment_id, task_id):
 
         elif (task_marks / task_marks_total) >= 0.8:
             feedback_comments.append("Good effort!")
+        
+        # Marks cannot be less than zero
+        elif task_marks < 0:
+            task_marks = 0
 
         # Transform feedback comment list to string
         feedback_string = " ".join(feedback_comments)
