@@ -18,6 +18,20 @@ As a tutor, I designed Marking Assistant to address the challenges I faced in ma
 - ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 - ![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)
 
+## Features
+
+### Adding Assignments
+![image](https://github.com/trrine/marking_assistant/assets/41973043/29ab2c97-9c71-4369-a9c4-23a00564da33)
+
+### Manage and Update Existing Assignments
+![image](https://github.com/trrine/marking_assistant/assets/41973043/b6ddf322-aa2f-4060-938d-2f78ef90525a)
+
+### Marking Assignment Tasks
+![image](https://github.com/trrine/marking_assistant/assets/41973043/392b802e-d2a5-4574-a3e5-d7963c581cec)
+
+### Exporting Marking Results
+![image](https://github.com/trrine/marking_assistant/assets/41973043/26da357b-5f20-4a2e-9e70-e541ef301caf)
+
 ## Getting Started
 
 ### Prerequisites
