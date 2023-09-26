@@ -56,4 +56,5 @@ python manage.py runserver
 ## TO DO:
 - Write more unit and integration tests
 - Add input validation
+- Add users and login functionality
 - Make design responsive
