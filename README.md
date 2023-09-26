@@ -4,11 +4,6 @@
 
 ## Description
 
-### Built With
-- ![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white)
-- ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
-- ![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)
-
 Marking Assistant is a practical tool developed to streamline the task of marking assignments and writing feedback for students. It simplifies the process of creating, managing, and marking assignments. With this app, you can:
 - Define assignment tasks with total marks and grading criteria.
 - Easily mark tasks by selecting met criteria.
@@ -18,8 +13,23 @@ Marking Assistant is a practical tool developed to streamline the task of markin
 
 As a tutor, I designed Marking Assistant to address the challenges I faced in marking assignments efficiently. It is a handy tool that automates certain tedious processes while keeping the human touch intact.
 
+### Built With
+- ![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white)
+- ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+- ![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)
+
+## Features
+
 ### Adding Assignments
 ![image](https://github.com/trrine/marking_assistant/assets/41973043/29ab2c97-9c71-4369-a9c4-23a00564da33)
+
+### Managing Existing Assignments
+
+
+### Marking Assignment Tasks
+
+
+### Exporting Marking Results
 
 
 ## Getting Started
