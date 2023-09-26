@@ -31,8 +31,9 @@
         <textarea name="extra_comments" rows="4" cols="50"></textarea>
 
         <!-- Submit button -->
-        <input type="submit" value="Save Marking">
+        <input type="submit" class="btn btn-tertiary" value="Save Marking">
     </form>
 
-    <a href="{% url 'download_results' %}">Download Marking Results</a>
+    <a href="{% url 'download_results' %}" class="btn btn-secondary">Download Results</a>
+    <a href="/start_marking" class="btn btn-primary">Choose Another Task</a>
 {% endblock %}

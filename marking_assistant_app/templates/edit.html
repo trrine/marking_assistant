@@ -5,57 +5,89 @@
 
 {% block content %}
 <h1>Edit Assignment</h1>
+<div class="assignment-form">
+    <form method="POST">
+        {% csrf_token %}
 
-<form method="POST">
-    {% csrf_token %}
+        <!-- Assignment details form -->
+        <!-- Manually render assignment fields -->
+        <div class="mb-3">
+            <label for="{{ assignment_form.assignment_number.id_for_label }}" class="form-label">Assignment Number:</label>
+            {{ assignment_form.assignment_number }}
+        </div>
+        <div class="mb-3">
+            <label for="{{ assignment_form.subject_code.id_for_label }}" class="form-label">Subject Code:</label>
+            {{ assignment_form.subject_code }}
+        </div>
+        <div class="mb-3">
+            <label for="{{ assignment_form.total_marks.id_for_label }}" class="form-label">Total Marks:</label>
+            {{ assignment_form.total_marks }}
+        </div>
 
-    <!-- Assignment details form -->
-    {{ assignment_form.as_p }}
+        <!-- Display existing tasks -->
+        <div id="task-container">
+            {% for task_form in task_formset %}
+                <div class="card task">
+                    <div class="card-body">
+                        <h3 class="card-title">Task Details</h3>
+                        <input type="hidden" name="task_id[]" value="{{ task_form.instance.id }}">
+                        <!-- Manually render task fields -->
+                        <div class="mb-3">
+                            <label for="task_number" class="form-label">Task Number:</label>
+                            <input type="number" name="task_number[]" class="form-control" value="{{ task_form.task_number.value }}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="task_total_marks" class="form-label">Total Mark for Task:</label>
+                            <input type="number" name="task_total_marks[]" class="form-control" value="{{ task_form.total_marks.value }}" required>
+                        </div>
 
-    <!-- Display existing tasks -->
-    <div id="task-container">
-        {% for task_form in task_formset %}
-            <div class="task">
-                <h3>Task Details</h3>
-                <input type="hidden" name="task_id[]" value="{{ task_form.instance.id }}">
-                <!-- Manually render task fields -->
-                <label for="task_number">Task Number:</label>
-                <input type="number" name="task_number[]" value="{{ task_form.task_number.value }}" required>
-                <label for="task_total_marks">Total Mark for Task:</label>
-                <input type="number" name="task_total_marks[]" value="{{ task_form.total_marks.value }}" required>
+                        <!-- Display existing criteria for this task -->
+                        <div class="criteria-container">
+                            {% for criteria_form in criteria_formset.forms %}
+                                {% if criteria_form.instance.task == task_form.instance %}
+                                    <div class="criteria">
+                                        <h4 class="card-title">Criteria Details</h4>
+                                        <input type="hidden" name="criteria_id[]" value="{{ criteria_form.instance.id }}">
+                                        <input type="hidden" name="task_for_criteria[]" value="{{ task_form.instance.task_number }}">
+                                        <!-- Manually render criteria fields -->
+                                        <div class="mb-3">
+                                            <label for="description" class="form-label">Description:</label>
+                                            <textarea name="description[]" class="form-control" rows="4" cols="50" required>{{ criteria_form.description.value }}</textarea>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="marks" class="form-label">Marks:</label>
+                                            <input type="number" name="marks[]" class="form-control" value="{{ criteria_form.marks.value }}" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="feedback_comment" class="form-label">Feedback Comment:</label>
+                                            <textarea name="feedback_comment[]" class="form-control" rows="4" cols="50">{{ criteria_form.feedback_comment.value }}</textarea>
+                                        </div>
+                                        <div class="button-container">
+                                            <button type="button" data-action="delete-criteria" class="btn btn-primary">Delete Criteria</button>
+                                        </div>
+                                    </div>
+                                    <hr/>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
 
-                <!-- Display existing criteria for this task -->
-                <div class="criteria-container">
-                    <h4>Criteria Details</h4>
-                    {% for criteria_form in criteria_formset.forms %}
-                        {% if criteria_form.instance.task == task_form.instance %}
-                            <div class="criteria">
-                                <input type="hidden" name="criteria_id[]" value="{{ criteria_form.instance.id }}">
-                                <input type="hidden" name="task_for_criteria[]" value="{{ task_form.instance.task_number }}">
-                                <!-- Manually render criteria fields -->
-                                <label for="description">Description:</label>
-                                <textarea name="description[]" rows="4" cols="50" required>{{ criteria_form.description.value }}</textarea>
-                                <label for="marks">Marks:</label>
-                                <input type="number" name="marks[]" value="{{ criteria_form.marks.value }}" required>
-                                <label for="feedback_comment">Feedback Comment:</label>
-                                <textarea name="feedback_comment[]" rows="4" cols="50">{{ criteria_form.feedback_comment.value }}</textarea>
-                                <button type="button" class="delete-criteria">Delete Criteria</button>
-                            </div>
-                        {% endif %}
-                    {% endfor %}
+                        <div class="button-container">
+                            <button type="button" data-action="add-criteria" class="btn btn-secondary add-button">Add Criteria</button>
+                            <button type="button" data-action="delete-task" class="btn btn-primary delete-button">Delete Task</button>
+                        </div>
+                    </div>
                 </div>
+            {% endfor %}
+        </div>
+        <div class="button-container">
+            <button type="button" data-action="add-task" class="btn btn-secondary add-button">Add Task</button>
 
-                <button type="button" class="add-criteria">Add Criteria</button>
-                <button type="button" class="delete-task">Delete Task</button>
-            </div>
-        {% endfor %}
-    </div>
+            <button type="button" data-action="delete-assignment" class="btn btn-primary">Delete Assignment</button>
 
-    <button type="button" class="add-task">Add Task</button>
-    <button type="button" class="delete-assignment">Delete Assignment</button>
-
-    <input type="submit" value="Save Changes">
-</form>
+            <input type="submit" class="btn btn-tertiary" value="Save Changes">
+        </div>
+    </form>
+</div>
 
 <script src="{% static 'js/add_manage_form.js' %}"></script>
 {% endblock %}

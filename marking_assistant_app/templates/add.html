@@ -4,20 +4,33 @@
 {% block title %}Add Assignment{% endblock %}
 
 {% block content %}
-    <h1>Add New Assignment</h1>
-    <p>Instruction will be written here...</p>
-
-    <form method="POST">
-        {% csrf_token %}
+    <div class="assignment-form">
+        <h1>Add New Assignment</h1>
         
-        {{ assignment_form.as_p }}
-        
-        <div id="task-container">
-        </div>
+        <form method="POST">
+            {% csrf_token %}
+            
+            <div class="mb-3">
+                <label for="{{ assignment_form.assignment_number.id_for_label }}" class="form-label">Assignment Number:</label>
+                {{ assignment_form.assignment_number }}
+            </div>
+            <div class="mb-3">
+                <label for="{{ assignment_form.subject_code.id_for_label }}" class="form-label">Subject Code:</label>
+                {{ assignment_form.subject_code }}
+            </div>
+            <div class="mb-3">
+                <label for="{{ assignment_form.total_marks.id_for_label }}" class="form-label">Total Marks:</label>
+                {{ assignment_form.total_marks }}
+            </div>
+    
+            
+            <div id="task-container">
+            </div>
 
-        <button type="button" class="add-task">Add Task</button>
-        <input type="submit" value="Save Assignment">
-    </form>
+            <button type="button" data-action="add-task" class="btn btn-secondary">Add Task</button>
+            <input type="submit" class="btn btn-tertiary" value="Save Assignment">
+        </form>
+    </div>
     
     <script src="{% static 'js/add_manage_form.js' %}"></script>
 {% endblock %}

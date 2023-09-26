@@ -1,93 +1,107 @@
 // FUNCTIONALITY FOR ADDING TASK
-
 document.addEventListener("DOMContentLoaded", () => {
-    const addTaskButton = document.querySelector(".add-task") as HTMLButtonElement;
+    const addTaskButton = document.querySelector("[data-action='add-task']") as HTMLButtonElement;
     addTaskButton.addEventListener("click", addTask);
 });
 
 function addTask() {
     const taskContainer = document.getElementById("task-container") as HTMLDivElement;
     const taskDiv = document.createElement("div");
-    taskDiv.className = "task";
-
+    taskDiv.className = "task card";
     taskDiv.innerHTML = `
-        <h3>Task Details</h3>
-        <input type="hidden" name="task_id[]" value="">
-        <label for="task_number">Task Number:</label>
-        <input type="number" name="task_number[]" required>
-        <label for="task_total_marks">Total Mark for Task:</label>
-        <input type="number" name="task_total_marks[]" required>
-        <div class="criteria-container"></div>
-        <button type="button" class="add-criteria">Add Criteria</button>
-        <button type="button" class="delete-task">Delete Task</button>
+        <div class="card-body">
+            <h3 class="card-title">Task Details</h3>
+            <input type="hidden" name="task_id[]" value="">
+            <div class="mb-3">
+                <label for="task_number" class="form-label">Task Number:</label>
+                <input type="number" name="task_number[]" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="task_total_marks" class="form-label">Total Mark for Task:</label>
+                <input type="number" name="task_total_marks[]" class="form-control" required>
+            </div>
+            <div class="criteria-container">
+            </div>
+            <button type="button" data-action="add-criteria" class="btn btn-primary add-button">Add Criteria</button>
+            <button type="button" data-action="delete-task" class="btn btn-primary">Delete Task</button>
+        </div>
     `;
-
     taskContainer.appendChild(taskDiv);
 }
 
 // FUNCTIONALITY FOR ADDING CRITERIA
-
 document.addEventListener("click", (event) => {
-    // Check if the clicked element has the class "add-criteria"
-    if ((event.target as HTMLElement).classList.contains("add-criteria")) {
-        // Call the addCriteria function when an "Add Criteria" button is clicked
-        const criteriaContainer = (event.target as HTMLElement).closest(".task")?.querySelector(".criteria-container") as HTMLDivElement;
+    const button = event.target as HTMLElement;
+    const action = button.getAttribute("data-action");
+
+    if (action === "add-criteria") {
+        const criteriaContainer = button.closest(".task")?.querySelector(".criteria-container") as HTMLDivElement;
         const taskNumberInput = criteriaContainer.parentElement?.querySelector("input[name='task_number[]']") as HTMLInputElement;
-        addCriteria(event.target as HTMLButtonElement, criteriaContainer, taskNumberInput);
+        addCriteria(button as HTMLButtonElement, criteriaContainer, taskNumberInput);
     }
 });
 
 function addCriteria(button: HTMLButtonElement, criteriaContainer: HTMLDivElement, taskNumberInput: HTMLInputElement) {
     const criteriaDiv = document.createElement("div");
     criteriaDiv.className = "criteria";
-
     criteriaDiv.innerHTML = `
-        <input type="hidden" name="criteria_id[]" value="">
-        <input type="hidden" name="task_for_criteria[]" value="${taskNumberInput.value}">
-        <label for="description">Description:</label>
-        <textarea name="description[]" rows="4" cols="50" required></textarea> 
-        <label for="marks">Marks:</label>
-        <input type="number" name="marks[]" required>
-        <label for="feedback_comment">Feedback Comment:</label>
-        <textarea name="feedback_comment[]" rows="4" cols="50"></textarea>
-        <button type="button" class="delete-criteria">Delete Criteria</button> 
+            <h4 class="card-title">Criteria Details</h4>
+            <input type="hidden" name="criteria_id[]" value="">
+            <input type="hidden" name="task_for_criteria[]" value="${taskNumberInput.value}">
+            <div class="mb-3">
+                <label for="description" class="form-label">Description:</label>
+                <textarea name="description[]" class="form-control" rows="4" cols="50" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="marks" class="form-label">Marks:</label>
+                <input type="number" name="marks[]" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="feedback_comment" class="form-label">Feedback Comment:</label>
+                <textarea name="feedback_comment[]" placeholder="Write a feedback comment for when the criteria has not been met"
+                    class="form-control" rows="4" cols="50"></textarea>
+            </div>
+            <button type="button" data-action="delete-criteria" class="btn btn-primary">Delete Criteria</button>
+            <hr/>
     `;
-
     criteriaContainer.appendChild(criteriaDiv);
 }
 
-// FUNCTIONALITY FOR DELETING TASK 
-
+// FUNCTIONALITY FOR DELETING TASK
 document.addEventListener("click", (event) => {
-    if ((event.target as HTMLElement).classList.contains("delete-task")) {
-        deleteTask(event.target as HTMLButtonElement);
+    const button = event.target as HTMLElement;
+    const action = button.getAttribute("data-action");
+
+    if (action === "delete-task") {
+        deleteTask(button as HTMLButtonElement);
     }
 });
 
 function deleteTask(button: HTMLButtonElement) {
-    const taskDiv = button.parentElement as HTMLDivElement;
+    const taskDiv = button.closest(".task") as HTMLDivElement;
     const taskContainer = taskDiv.parentElement as HTMLDivElement;
     taskContainer.removeChild(taskDiv);
 }
 
-// FUNCTIONALITY FOR DELETING CRITERIA 
-
+// FUNCTIONALITY FOR DELETING CRITERIA
 document.addEventListener("click", (event) => {
-    if ((event.target as HTMLElement).classList.contains("delete-criteria")) {
-        deleteCriteria(event.target as HTMLButtonElement);
+    const button = event.target as HTMLElement;
+    const action = button.getAttribute("data-action");
+
+    if (action === "delete-criteria") {
+        deleteCriteria(button as HTMLButtonElement);
     }
 });
 
 function deleteCriteria(button: HTMLButtonElement) {
-    const criteriaDiv = button.parentElement as HTMLDivElement;
+    const criteriaDiv = button.closest(".criteria") as HTMLDivElement;
     const criteriaContainer = criteriaDiv.parentElement as HTMLDivElement;
     criteriaContainer.removeChild(criteriaDiv);
 }
 
 // FUNCTIONALITY FOR DELETING ASSIGNMENT
-
 document.addEventListener("DOMContentLoaded", () => {
-    const deleteAssignmentButton = document.querySelector(".delete-assignment") as HTMLButtonElement | null;
+    const deleteAssignmentButton = document.querySelector("[data-action='delete-assignment']") as HTMLButtonElement | null;
 
     if (deleteAssignmentButton) {
         deleteAssignmentButton.addEventListener("click", deleteAssignment);

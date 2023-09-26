@@ -2,6 +2,7 @@
 body {
     --bs-body-font-family: "Figtree", sans-serif;
     --bs-body-color: #1f1235;
+    min-height: 100vh;
 }
 
 header {
@@ -10,9 +11,6 @@ header {
 }
 
 footer {
-    position: absolute;
-    bottom: 0;
-    margin-left: 20px;
     text-align: center;
 }
 
@@ -22,6 +20,30 @@ footer {
     border-width: 3px !important;
     color: #1f1235 !important;
     font-weight: bold !important;
+}
+
+.btn-secondary {
+    background-color: #fbdd74 !important;
+    border-color: #fbdd74 !important;
+    border-width: 3px !important;
+    color: #1f1235 !important;
+    font-weight: bold !important;
+}
+
+.btn-tertiary {
+    background-color: #a195ba !important;
+    border-color: #a195ba !important;
+    border-width: 3px !important;
+    color: #1f1235 !important;
+    font-weight: bold !important;
+}
+
+h1 {
+    font-size: 50px;
+    font-weight: bold;
+    color:#1f1235;
+    text-align: center;
+    padding-bottom: 40px;
 }
 
 /* BASE: NAVIGATION BAR */
@@ -35,58 +57,100 @@ footer {
 }
 
 .nav-item a:hover {
-    color: white;
+    color: #fbdd74;
 }
 
 .nav-item {
     font-size: 20px;
-    font-weight: bold;
+    font-weight: 600;
 }
 
 /* INDEX */
 
-.heading {
-    font-size: 50px;
-    font-weight: bold;
-    color:#1f1235;
-    text-align: center;
-}
-
 .index-text {
     font-size: 26px;
+    font-weight: 300;
     text-align: center;
-    width: 600px;
+    width: 1000px;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 30px;
     margin-bottom: 50px;
 }
 
 .nav-button {
-    font-size: 24px !important;
-    height: 100px !important;
+    font-size: 22px !important;
+    font-weight: 600 !important;
+    height: 80px !important;
     display: inline-flex !important;
     justify-content: center !important;
     align-items: center !important;
-    width: 250px !important;
-}
-
-.nav-button {
-    font-size: 24px !important;
-    height: 100px !important;
-    display: inline-flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    width: 250px !important;
+    width: 220px !important;
     margin-left: 20px;
     margin-right: 20px;
 }
 
-.nav-button:hover {
+
+.btn:hover {
     background-color: white !important;
-    color: #ff6e6c !important;
 }
 
 .main-content {
     text-align: center !important;
+    margin-bottom: 40px;
+}
+
+#index-image {
+    width: 300px;
+    fill: #1f1235;
+    margin-bottom: 40px;
+}
+
+.highlight {
+    font-weight: 700;
+    color: #a195ba;
+}
+
+
+/* ASSIGNMENT FORM */
+
+.assignment-form {
+    max-width: 1000px; /* Adjust this value as needed */
+    margin: 0 auto; /* Center the form horizontally */
+    padding: 20px; /* Add some padding for spacing */
+}
+
+.add-button:hover {
+    background-color: white !important;
+}
+
+.card {
+    margin-bottom: 20px;
+    margin-top: 20px;
+    border-width: 1.5px !important;
+}
+
+.form-label {
+    font-size: 20px !important;
+}
+
+.button-container {
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.form-control {
+    border-width: 2px !important;
+}
+
+.button-container .btn {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.card-title {
+    margin-bottom: 10px !important;
+    margin-top: 10px !important;
+    text-align: center !important;
+    color: #1b1425 !important;
 }
