@@ -30,7 +30,7 @@ As a tutor, I designed Marking Assistant to address the challenges I faced in ma
 ![image](https://github.com/trrine/marking_assistant/assets/41973043/392b802e-d2a5-4574-a3e5-d7963c581cec)
 
 ### Exporting Marking Results
-![image](https://github.com/trrine/marking_assistant/assets/41973043/bede6d6c-9e96-4e8e-9feb-492ff1124450)
+![image](https://github.com/trrine/marking_assistant/assets/41973043/26da357b-5f20-4a2e-9e70-e541ef301caf)
 
 ## Getting Started
 
