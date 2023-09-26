@@ -1,12 +1,12 @@
 from collections import defaultdict
 import os
 from django.shortcuts import render, redirect, get_object_or_404
-
 from marking_assistant_app.utils import generate_marking_results_excel
 from .forms import AssignmentForm, CriteriaForm, TaskForm
 from .models import Assignment, Task, Criteria
 from django.forms import modelformset_factory
 from django.http import HttpResponse, FileResponse
+from django.contrib import messages
 
 def index_view(request):
     return render(request, "index.html")
@@ -266,8 +266,8 @@ def download_results_view(request):
                 return FileResponse(open(excel_file_path, "rb"), as_attachment=True, filename="marking_results.xlsx")
             
             except Exception as e:
-                print(e)
                 return HttpResponse("Error while serving the file", status=500)
     
     # Handle cases where there are no marking results
-    return HttpResponse("No marking results found", status=404)
+    messages.error(request, "No marking results found.")
+    return redirect("start_marking")

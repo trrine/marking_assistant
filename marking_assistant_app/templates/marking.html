@@ -33,5 +33,12 @@
         <div class="button-container">
             <a href="{% url 'download_results' %}" class="btn btn-secondary">Download Results</a>
         </div>
+        <div class="error-messages">
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        </div>
     </div>
 {% endblock %}

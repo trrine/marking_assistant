@@ -45,8 +45,9 @@ h1 {
     padding-bottom: 40px;
 }
 
-footer {
-    vertical-align: bottom;
+.error-messages {
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 /* BASE: NAVIGATION BAR */
