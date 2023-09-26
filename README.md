@@ -4,7 +4,7 @@
 
 ## Description
 
-Marking Assistant is a practical tool developed to streamline the process of marking assignments and writing feedback for students. It simplifies the process of creating, managing, and marking assignments. With this app, you can:
+Marking Assistant is a practical tool developed to streamline the task of marking assignments and writing feedback for students. It simplifies the process of creating, managing, and marking assignments. With this app, you can:
 - Define assignment tasks with total marks and grading criteria.
 - Easily mark tasks by selecting met criteria.
 - Automatically calculate student marks and generate feedback.
