@@ -30,11 +30,8 @@ Or press Code➝Download ZIP.
 cd PATH_TO_PROJECT
 pip install -r requirements.txt
 ```
-
-### Database Initialisation 
-Navigate to the project location and run the following commands:
+3. Run the following commands to setup the database:
 ```
-cd PATH_TO_PROJECT
 python manage.py makemigrations
 python manage.py migrate
 ```
