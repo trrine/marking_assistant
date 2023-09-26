@@ -31,6 +31,14 @@ cd PATH_TO_PROJECT
 pip install -r requirements.txt
 ```
 
+### Database Initialisation 
+Navigate to the project location and run the following commands:
+```
+cd PATH_TO_PROJECT
+python manage.py makemigrations
+python manage.py migrate
+```
+
 ## Usage
 
 ## TO DO:
