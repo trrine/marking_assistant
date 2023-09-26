@@ -23,14 +23,14 @@ As a tutor, I designed Marking Assistant to address the challenges I faced in ma
 ### Adding Assignments
 ![image](https://github.com/trrine/marking_assistant/assets/41973043/29ab2c97-9c71-4369-a9c4-23a00564da33)
 
-### Managing Existing Assignments
-
+### Manage and Update Existing Assignments
+![image](https://github.com/trrine/marking_assistant/assets/41973043/b6ddf322-aa2f-4060-938d-2f78ef90525a)
 
 ### Marking Assignment Tasks
-
+![image](https://github.com/trrine/marking_assistant/assets/41973043/392b802e-d2a5-4574-a3e5-d7963c581cec)
 
 ### Exporting Marking Results
-
+![image](https://github.com/trrine/marking_assistant/assets/41973043/bede6d6c-9e96-4e8e-9feb-492ff1124450)
 
 ## Getting Started
 
