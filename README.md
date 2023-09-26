@@ -6,7 +6,14 @@ A Django web application that streamlines the process of marking and writing fee
 
 ## Description
 
-TO DO
+Marking Assistant is a practical tool developed to streamline the task of marking assignments and writing feedback for students. It simplifies the process of creating, managing, and marking assignments. With this app, you can:
+- Define assignment tasks with total marks and grading criteria.
+- Easily mark tasks by selecting met criteria.
+- Automatically calculate student marks and generate feedback.
+- Temporarily store results during your session.
+- Export results to an Excel file.
+
+As a tutor, I designed Marking Assistant to address the challenges I faced in marking assignments efficiently. It is a handy tool that automates certain tedious processes while keeping the human touch intact.
 
 ### Built With
 - ![Django](https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white)
