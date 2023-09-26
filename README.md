@@ -2,30 +2,7 @@
 
 A Django web application that streamlines the process of marking and writing feedback for assignments. 
 
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#description">Description</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#requirements">Requirements</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-      <ul>
-        <li><a href="#starting-the-application">Starting the Application</a></li>
-        <li><a href="#how-to-use">How to Use</a></li>
-      </ul>
-  </ol>
-</details>
+![project_4_img_1](https://github.com/trrine/marking_assistant/assets/41973043/10f31300-c388-4be0-96e0-7d9c81b29c07)
 
 ## Description
 
@@ -56,4 +33,7 @@ pip install -r requirements.txt
 
 ## Usage
 
-TO DO
+## TO DO:
+- Write more unit and integration tests
+- Add input validation
+- Make design responsive
