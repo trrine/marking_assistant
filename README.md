@@ -46,9 +46,8 @@ cd PATH_TO_PROJECT
 python manage.py runserver
 ```
 3. Open your browser and go to:
-```
 [http://127.0.0.1:8000](http://127.0.0.1:8000)
-```
+
 ## TO DO:
 - Write more unit and integration tests
 - Add input validation
