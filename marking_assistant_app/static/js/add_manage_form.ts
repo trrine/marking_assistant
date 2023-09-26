@@ -18,7 +18,7 @@ function addTask() {
             </div>
             <div class="mb-3">
                 <label for="task_total_marks" class="form-label">Total Mark for Task:</label>
-                <input type="number" name="task_total_marks[]" class="form-control" required>
+                <input type="number" step="0.01" name="task_total_marks[]" class="form-control" required>
             </div>
             <div class="criteria-container">
             </div>
@@ -56,7 +56,7 @@ function addCriteria(button: HTMLButtonElement, criteriaContainer: HTMLDivElemen
             </div>
             <div class="mb-3">
                 <label for="marks" class="form-label">Marks:</label>
-                <input type="number" name="marks[]" class="form-control" required>
+                <input type="number" step="0.01" name="marks[]" class="form-control" required>
             </div>
             <div class="mb-3">
                 <label for="feedback_comment" class="form-label">Feedback Comment:</label>

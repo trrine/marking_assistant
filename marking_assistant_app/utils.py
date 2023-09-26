@@ -7,10 +7,10 @@ def generate_marking_results_excel(marking_results_data):
     # Create a new Excel workbook and add data to it
     wb = openpyxl.Workbook()
     ws = wb.active
-    ws.append(["Student Number", "Assignment Number", "Task Number", "Marks", "Feedback"])
+    ws.append(["Subject Code", "Student Number", "Assignment Number", "Task Number", "Marks", "Feedback"])
 
     for result in marking_results_data:
-        ws.append([result["student_number"], int(result["assignment_number"]), int(result["task_number"]),
+        ws.append([result["subject_code"], result["student_number"], int(result["assignment_number"]), int(result["task_number"]),
                    float(result["marks"]), result["feedback"]])
 
     # Save the Excel file temporarily on the server

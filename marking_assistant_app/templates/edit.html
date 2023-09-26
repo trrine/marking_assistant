@@ -38,7 +38,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="task_total_marks" class="form-label">Total Mark for Task:</label>
-                            <input type="number" name="task_total_marks[]" class="form-control" value="{{ task_form.total_marks.value }}" required>
+                            <input type="number" step="0.01" name="task_total_marks[]" class="form-control" value="{{ task_form.total_marks.value }}" required>
                         </div>
 
                         <!-- Display existing criteria for this task -->
@@ -56,7 +56,7 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="marks" class="form-label">Marks:</label>
-                                            <input type="number" name="marks[]" class="form-control" value="{{ criteria_form.marks.value }}" required>
+                                            <input type="number" step="0.01" name="marks[]" class="form-control" value="{{ criteria_form.marks.value }}" required>
                                         </div>
                                         <div class="mb-3">
                                             <label for="feedback_comment" class="form-label">Feedback Comment:</label>

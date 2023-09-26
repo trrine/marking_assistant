@@ -230,9 +230,10 @@ def mark_task_view(request, assignment_id, task_id):
 
         # Save marking results for student
         student_task_results = {
+            "subject_code": assignment.subject_code,
             "student_number": str(student_number),
-            "assignment_number": str(assignment_id),
-            "task_number": str(task_id),
+            "assignment_number": str(assignment.assignment_number),
+            "task_number": str(task.task_number),
             "marks": str(task_marks),
             "feedback": feedback_string
         }
