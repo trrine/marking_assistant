@@ -2,7 +2,7 @@
 
 A Django web application that streamlines the process of marking and writing feedback for assignments. 
 
-![project_4_img_1](https://github.com/trrine/marking_assistant/assets/41973043/10f31300-c388-4be0-96e0-7d9c81b29c07)
+![image](https://github.com/trrine/marking_assistant/assets/41973043/e0df6aea-1534-47dd-a122-b6d36bb48133)
 
 ## Description
 
