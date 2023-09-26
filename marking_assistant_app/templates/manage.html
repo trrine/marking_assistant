@@ -2,11 +2,14 @@
 
 {% block content %}
     <h1>Manage Assignments</h1>
-    <ul>
-        {% for assignment in assignments %}
-            <li>
-                <a href="{% url 'edit_assignment' assignment.id %}">{{ assignment.subject_code }}: Assignment {{ assignment.assignment_number }}</a>
-            </li>
-        {% endfor %}
-    </ul>
+    <div class="list-container" align="center">
+        <h4>Please select an assignment to edit:</h4>
+        <ul class="list-group">
+            {% for assignment in assignments %}
+                <li class="list-group-item">
+                    <a href="{% url 'edit_assignment' assignment.id %}">{{ assignment.subject_code }}: Assignment {{ assignment.assignment_number }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 {% endblock %}

@@ -1,39 +1,46 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Mark Task</h1>
+    <div class="headings">
+        <h1>Marking {{ assignment.subject_code }}: Assignment {{ assignment.assignment_number }} Task {{ task.task_number }}</h1>
+    </div>
 
-    <h2>{{ assignment.subject_code }}: Assignment {{ assignment.assignment_number }}</h2>
-    <h3>Task {{ task.task_number }}</h3>
+    <div class="assignment-form">
+        <form method="post" class="mt-4">
+            {% csrf_token %}
 
-    <form method="post">
-        {% csrf_token %}
+            <!-- Student number input field -->
+            <div class="form-group">
+                <label for="student_number" class="form-label">Student Number:</label>
+                <input type="text" name="student_number" class="form-control" required>
+            </div>
 
-        <!-- Student number input field -->
-        <label for="student_number">Student Number:</label>
-        <input type="text" name="student_number" required>
+            <!-- Display the list of marking criteria here -->
+            <h4>Marking Criteria:</h4>
+            <ul class="list-group">
+                {% for criteria in task.criteria_set.all %}
+                    <li class="list-group-item">
+                        <div class="form-check">
+                            <input type="checkbox" name="criteria_checked[]" value="{{ criteria.id }}" class="form-check-input">
+                            <label class="form-check-label">
+                                {{ criteria.description }}
+                            </label>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
 
-        <!-- Display the list of marking criteria here -->
-        <h4>Criteria:</h4>
-        <ul>
-            {% for criteria in task.criteria_set.all %}
-                <li>
-                    <label>
-                        <input type="checkbox" name="criteria_checked[]" value="{{ criteria.id }}">
-                        {{ criteria.description }}
-                    </label>
-                </li>
-            {% endfor %}
-        </ul>
+            <!-- Extra comments textarea -->
+            <div class="form-group mt-4">
+                <label for="extra_comments" class="form-label">Extra Comments:</label>
+                <textarea name="extra_comments" class="form-control" rows="4" cols="50"></textarea>
+            </div>
 
-        <!-- Extra comments textarea -->
-        <label for="extra_comments">Extra Comments:</label>
-        <textarea name="extra_comments" rows="4" cols="50"></textarea>
-
-        <!-- Submit button -->
-        <input type="submit" class="btn btn-tertiary" value="Save Marking">
-    </form>
-
-    <a href="{% url 'download_results' %}" class="btn btn-secondary">Download Results</a>
-    <a href="/start_marking" class="btn btn-primary">Choose Another Task</a>
+            <div class="button-container">
+                <a href="/start_marking" class="btn btn-primary">Choose Task</a>
+                <a href="{% url 'download_results' %}" class="btn btn-secondary">Download Results</a>
+                <input type="submit" class="btn btn-tertiary" value="Save Marking">
+            </div>
+        </form>
+    </div>
 {% endblock %}

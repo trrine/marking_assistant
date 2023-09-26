@@ -22,8 +22,10 @@ function addTask() {
             </div>
             <div class="criteria-container">
             </div>
-            <button type="button" data-action="add-criteria" class="btn btn-primary add-button">Add Criteria</button>
-            <button type="button" data-action="delete-task" class="btn btn-primary">Delete Task</button>
+            <div class="button-container">
+                <button type="button" data-action="add-criteria" class="btn btn-secondary add-button">Add Criteria</button>
+                <button type="button" data-action="delete-task" class="btn btn-primary">Delete Task</button>
+            </div>
         </div>
     `;
     taskContainer.appendChild(taskDiv);
@@ -61,7 +63,9 @@ function addCriteria(button: HTMLButtonElement, criteriaContainer: HTMLDivElemen
                 <textarea name="feedback_comment[]" placeholder="Write a feedback comment for when the criteria has not been met"
                     class="form-control" rows="4" cols="50"></textarea>
             </div>
-            <button type="button" data-action="delete-criteria" class="btn btn-primary">Delete Criteria</button>
+            <div class="button-container">
+                <button type="button" data-action="delete-criteria" class="btn btn-primary">Delete Criteria</button>
+            </div>
             <hr/>
     `;
     criteriaContainer.appendChild(criteriaDiv);

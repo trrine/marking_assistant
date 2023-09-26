@@ -4,21 +4,34 @@
 
 {% block content %}
     <h1>Marking</h1>
-    <p>Choose a task to start marking...</p>
-    <ul>
-        {% for assignment in assignments %}
-            <li>
-                {{ assignment.subject_code }}: Assignment {{ assignment.assignment_number }}
-                <ul>
-                    {% for task in assignment.task_set.all %}
-                        <li>
-                            <a href="{% url 'mark_task' assignment.id task.id %}">
-                                Task {{ task.task_number }}
-                            </a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </li>
-        {% endfor %}
-    </ul>
+    <div class="list-container">
+        <div class="instructions">
+            <h4>How It Works:</h4>
+            <ol>
+                <li>Choose a task to start marking students.</li>
+                <li>Your marking results are stored temporarily for this session.</li>
+                <li>Before ending the session, remember to download the results.</li>
+                <li>The marking results are exported in an Excel file.</li>
+            </ol>
+        </div>
+        <ul class="list-group">
+            {% for assignment in assignments %}
+                <li class="list-group-item">
+                    <h5>{{ assignment.subject_code }}: Assignment {{ assignment.assignment_number }}</h5>
+                    <ul class="list-group">
+                        {% for task in assignment.task_set.all %}
+                            <li class="list-group-item">
+                                <a href="{% url 'mark_task' assignment.id task.id %}">
+                                    Task {{ task.task_number }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% endfor %}
+        </ul>
+        <div class="button-container">
+            <a href="{% url 'download_results' %}" class="btn btn-secondary">Download Results</a>
+        </div>
+    </div>
 {% endblock %}
