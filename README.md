@@ -72,3 +72,4 @@ python manage.py runserver
 - Add input validation
 - Add users and login functionality
 - Make design responsive
+- Only display markable tasks with criteria
