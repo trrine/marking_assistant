@@ -249,6 +249,13 @@ def mark_task_view(request, assignment_id, task_id):
         # Update the session with the modified marking_results_data
         request.session["marking_results_data"] = marking_results_data
 
+        # Go to results page for latest student results
+        return render(request, "results.html", {
+            "assignment": assignment,
+            "task": task,
+            "student_task_results": student_task_results
+        })
+
     return render(request, "mark_task.html", {
         "assignment": assignment,
         "task": task,

@@ -199,3 +199,16 @@ h1 {
 form h4 {
     margin-top: 20px;
 }
+
+/* RESULTS */
+
+.student-number-h3 {
+    font-weight: 300;
+    text-align: center;
+}
+
+.sub-heading {
+    color:#a195ba;
+    text-align: center;
+    padding-bottom: 10px;
+}

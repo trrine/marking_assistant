@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Marking Results{% endblock %}
+
+{% block content %}
+    <h1>Latest Marking Results</h1>
+    <h2 class="sub-heading">{{ assignment.subject_code }}: Assignment {{ assignment.assignment_number }} Task {{ task.task_number }}</h2>
+    <h3 class="student-number-h3">Student Number: {{ student_task_results.student_number }}</h3>
+    <div class="assignment-form">
+        <div class="form-group mt-4">
+            <label for="marks" class="form-label">Marks:</label>
+            <input type="number" id="marks" class="form-control" name="marks" value="{{ student_task_results.marks }}" required>
+        </div>
+        
+        <div class="form-group mt-4">
+            <label for="feedback" class="form-label">Feedback:</label>
+            <textarea id="feedback" name="feedback" class="form-control" rows="4" cols="50">{{ student_task_results.feedback }}</textarea>
+        </div>
+
+        <!-- Buttons -->
+        <div class="button-container">
+            <!-- Button to download all session results -->
+            <a href="{% url 'download_results' %}" class="btn btn-secondary">Download Results</a>
+
+            <!-- Button to continue marking -->
+            <a href="{% url 'mark_task' assignment.id task.id %}" class="btn btn-primary">Continue Marking</a>
+        </div>
+    </div>
+{% endblock %}
