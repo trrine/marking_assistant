@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Marking Results{% endblock %}
 
@@ -17,13 +18,11 @@
             <textarea id="feedback" name="feedback" class="form-control" rows="4" cols="50">{{ student_task_results.feedback }}</textarea>
         </div>
 
-        <!-- Buttons -->
         <div class="button-container">
-            <!-- Button to download all session results -->
+            <button class="btn btn-primary" data-action="copy-feedback">Copy Feedback</button>
             <a href="{% url 'download_results' %}" class="btn btn-secondary">Download Results</a>
-
-            <!-- Button to continue marking -->
-            <a href="{% url 'mark_task' assignment.id task.id %}" class="btn btn-primary">Continue Marking</a>
+            <a href="{% url 'mark_task' assignment.id task.id %}" class="btn btn-tertiary">Continue Marking</a>
         </div>
     </div>
+    <script src="{% static 'js/add_manage_form.js' %}"></script>
 {% endblock %}

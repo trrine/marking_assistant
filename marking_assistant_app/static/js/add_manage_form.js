@@ -74,3 +74,22 @@ function deleteAssignment() {
         }
     }
 }
+// FUNCTIONALITY FOR COPYING FEEDBACK
+document.addEventListener("click", function (event) {
+    var button = event.target;
+    var action = button.getAttribute("data-action");
+    if (action === "copy-feedback") {
+        var feedbackTextarea = document.querySelector("#feedback");
+        // Select the text in the textarea
+        feedbackTextarea.select();
+        try {
+            // Copy the selected text to the clipboard
+            document.execCommand("copy");
+            // Change the button text to "Copied"
+            button.textContent = "Copied";
+        }
+        catch (err) {
+            console.error("Unable to copy text: ", err);
+        }
+    }
+});
