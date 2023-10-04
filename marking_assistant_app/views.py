@@ -204,7 +204,12 @@ def mark_task_view(request, assignment_id, task_id):
                 mark_deduction = criteria.marks
                 feedback = criteria.feedback_comment
                 task_marks -= mark_deduction
-                feedback_comments.append(feedback + " (-" + str(mark_deduction) + ").")
+
+                if mark_deduction > 0:
+                    feedback_comments.append(feedback + " (-" + str(mark_deduction) + ").")
+                
+                else:
+                    feedback_comments.append(feedback + ".")
 
         # Add extra comment from user if not empty
         if len(extra_comments) != 0:
