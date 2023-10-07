@@ -124,6 +124,16 @@ def edit_assignment_view(request, assignment_id):
             # Delete tasks that are in the 'tasks_to_delete' set
             Task.objects.filter(id__in=tasks_to_delete).delete()
 
+            # Retrieve criteria IDs from the database and form data
+            criteria_ids_db = set(Criteria.objects.filter(task__assignment=assignment).values_list("id", flat=True))
+            criteria_ids_form = set(int(criteria_id) for criteria_id in criteria_ids if criteria_id)  # Convert form data to a set of integers
+
+            # Find criteria IDs in the database but not in the form data
+            criteria_to_delete = criteria_ids_db.difference(criteria_ids_form)
+
+            # Delete criteria that are in the 'criteria_to_delete' set
+            Criteria.objects.filter(id__in=criteria_to_delete).delete()
+
             for i in range(len(task_numbers)):
                 task_number = task_numbers[i]
                 task_total_marks = task_total_marks_list[i]
